@@ -1,0 +1,140 @@
+laukSI0G9T0bHKdY1SWH1m8I
+Q0IzWQVEJhF3wQ4yaa9FlmOb
+https://github.com/orsas83-dotcom/sas-player/new/main?filename=.github/workflows/android-build.yml
+cd /tmp/cc-agent/60388027/project
+git init
+git add .
+git commit -m "Initial commit - SAS Player"
+git branch -M main
+git remote add origin https://github.com/orsas83-dotcom/sas-player.git
+git push -u origin main
+
+Options -Indexes
+<?php
+$total_devices   = 120;
+$active_devices  = 85;
+$expired_devices = 35;
+?>
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>SasPanel - Yönetim</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* —————————— IBO TARZI MODERN PANEL —————————— */
+:root{
+    --bg:#101322;
+    --bg2:#171b2e;
+    --acc:#ff6f3c;
+    --soft:#ff9f59;
+    --text:#fff;
+    --sub:#a0a8c2;
+}
+body{
+    margin:0;
+    background:var(--bg);
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    display:flex;
+}
+.sidebar{
+    width:230px;
+    background:var(--bg2);
+    padding:20px;
+}
+.logo{
+    font-size:22px;
+    font-weight:700;
+    color:var(--soft);
+    margin-bottom:20px;
+}
+.link{
+    padding:10px 12px;
+    border-radius:10px;
+    margin-bottom:6px;
+    display:block;
+    text-decoration:none;
+    color:var(--sub);
+    transition:.2s;
+}
+.link:hover, .active{
+    background:rgba(255,111,60,.2);
+    color:var(--soft);
+}
+.main{
+    flex:1;
+    padding:25px;
+}
+.card-box{
+    background:var(--bg2);
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+.value{
+    font-size:28px;
+    font-weight:700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="logo">SasPanel TV</div>
+    <a class="link active">Dashboard</a>
+    <a class="link">MAC Aktivasyon</a>
+    <a class="link">Cihaz Listesi</a>
+    <a class="link">Ayalar</a>
+</div>
+
+<div class="main">
+
+    <h2>Dashboard</h2>
+
+    <div class="card-box">
+        <div>Toplam Cihaz</div>
+        <div class="value"><?php echo $total_devices; ?></div>
+    </div>
+
+    <div class="card-box">
+        <div>Aktif</div>
+        <div class="value" style="color:#61ff91"><?php echo $active_devices; ?></div>
+    </div>
+
+    <div class="card-box">
+        <div>Süresi Biten</div>
+        <div class="value" style="color:#ff4b6a"><?php echo $expired_devices; ?></div>
+    </div>
+
+    <h3>Hızlı MAC Aktivasyon</h3>
+
+    <form method="POST" action="save.php">
+        <input name="mac" style="padding:10px;width:300px;border-radius:10px;border:none;margin-bottom:10px" placeholder="MAC Adresi"><br>
+        <input name="gun" style="padding:10px;width:300px;border-radius:10px;border:none;margin-bottom:10px" placeholder="Gün (365)"><br>
+        <input name="paket" style="padding:10px;width:300px;border-radius:10px;border:none;margin-bottom:10px" placeholder="Paket (Full/Spor)"><br>
+        <button style="padding:10px 20px;border:none;border-radius:10px;background:var(--acc);color:#000;font-weight:700;">Aktif Et</button>
+    </form>
+
+</div>
+
+</body>
+</html>
+
+<?php
+$mac   = $_POST["mac"];
+$gun   = $_POST["gun"];
+$paket = $_POST["paket"];
+
+$file = fopen("devices.txt","a");
+fwrite($file, "$mac | $gun gün | $paket\n");
+fclose($file);
+
+header("Location: index.php");
+exit;
+
+
+Options -Indexes
